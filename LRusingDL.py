@@ -21,3 +21,20 @@ print(model.compile(optimizer=tf.keras.optimizers.Adam(lr=0.1), loss='mse'))
 
 # summary
 print(model.summary())
+
+history = model.fit(X, Y, epochs = 10)
+print(history)
+
+#prediction
+print(model.predict(X))
+
+
+# Draw Regression Line
+line_x = np.arange(min(X), max(X), 0.01)
+line_y = model.predict(line_x)
+
+plt.plot(line_x, line_y, 'g-')
+plt.plot(X, Y, 'bo')
+plt.xlabel("population_growth Rate (%)")
+plt.ylabel("population_elder Rate (%)")
+plt.show()
