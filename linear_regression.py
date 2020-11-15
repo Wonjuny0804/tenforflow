@@ -76,7 +76,7 @@ w2 = tf.Variable(random.random())
 b = tf.Variable(random.random())
 
 # return loss value
-def return_loss():
+def return_loss2():
 
   #dot Operation
   y_pred = w1 * X * X + w2 * X + b
@@ -88,10 +88,10 @@ def return_loss():
 optimizer = tf.optimizers.Adam(lr=0.07)
 
 for i in range(1000):
-  optimizer.minimize(return_loss, var_list = [w1, w2, b])
+  optimizer.minimize(return_loss2, var_list = [w1, w2, b])
 
   if i % 100 == 99:
-    print(i, 'w : ', w.numpy(), ' b : ', b.numpy(), ' loss : ', return_loss().numpy())
+    print(i, 'w : ', w.numpy(), ' b : ', b.numpy(), ' loss : ', return_loss2().numpy())
 
 # draw the Regression Line
 line_x = np.arange(min(X), max(X), 0.01)
