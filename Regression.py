@@ -1,4 +1,5 @@
 #BostionHosting dataset is in tensorflow
+import tensorflow as tf
 from tensorflow.keras.datasets import boston_housing as BH
 
 # boston_housing dataset Load 
@@ -37,10 +38,13 @@ print("The form of Standardization Train_Y Data: ", train_Y[0])
 
 model = tf.keras.Sequential([
   tf.keras.layers.Dense(units=52, activatiuon='relu', input_shoe=(13,)),
-  tf.keras.layers.Dense(units=39, activatiuon='relu')
-  tf.keras.layers.Dense(units=26, activatiuon='relu')
+  tf.keras.layers.Dense(units=39, activatiuon='relu'),
+  tf.keras.layers.Dense(units=26, activatiuon='relu'),
   tf.keras.layers.Dense(units=1)
 ])
 # set model and model summary
 model.compile(optimizer=tf.keras.optimizers.Adam(lr=0.07), loss='mse')
 model.summary()
+
+#v Learning model
+history = model.fit(train_X, train_Y, epochs=25, batch_size=32, validation_split=0.25)
