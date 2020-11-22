@@ -47,5 +47,30 @@ model.compile(optimizer=tf.keras.optimizers.Adam(lr=0.07), loss='mse')
 model.summary()
 
 #v Learning model
-history = model.fit(train_X, train_Y, epochs=25, batch_size=32, validation_split=0.25)
+history = model.fit(train_X, train_Y, epochs=25, batch_size=32, validation_split=0.25,
+                    callbacks=[tf.keras.callbacks.EarlyStopping(patience=3,monitor='val_loss')])
 print(history)
+
+plt.plot(history.history['loss'], 'b--', label='loss')
+plt.plot(history.history['val_loss'], 'r--', label='val_loss')
+plt.show()
+
+# evaluate model using test data
+testLoss = model.evaluate(test_X, test_Y)
+print('\nTest Loss : ', testLoss)
+
+# compare with Real and Prediction 
+pred_Y = model.predict(test_X)
+
+print(pred_Y)
+
+plt.figure(figsuze=(5,5))
+plt.plot(test_Y, pred_Y, 'b.')
+plt.axis([min(test_Y), max(test_Y), min(test_Y), max(test_Y)])
+
+plt.plot([min(test_Y), max(test_Y)],[min(test_Y), max(test_Y)], ls='-.', c='.5')
+
+plt.xlabel('test_Y')
+plt.ylabel('pred_Y')
+
+plt.show()
