@@ -48,3 +48,4 @@ model.summary()
 
 #v Learning model
 history = model.fit(train_X, train_Y, epochs=25, batch_size=32, validation_split=0.25)
+print(history)
